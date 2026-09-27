@@ -2,18 +2,18 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box; /* Dari materi kuis: memasukkan padding & border ke dalam width */
+    box-sizing: border-box;
 }
 
 :root {
-    --primary: #2563eb;
-    --dark: #1e293b;
+    --primary: #4f46e5; /* Warna kustom Indigo Modern */
+    --dark: #0f172a;    /* Warna kustom Slate Gelap */
     --light: #f8fafc;
-    --gray: #94a3b8;
+    --gray: #64748b;
 }
 
 body {
-    font-family: 'Segoe UI', sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: var(--light);
     color: var(--dark);
     line-height: 1.6;
@@ -28,8 +28,8 @@ body {
 /* Navigation */
 nav {
     background: white;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    position: fixed; /* Dari materi kuis: agar elemen tetap saat di-scroll */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    position: fixed;
     width: 100%;
     top: 0;
     z-index: 100;
@@ -39,19 +39,25 @@ nav .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 20px;
+    padding: 18px 20px;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--primary);
 }
 
 .nav-links {
     display: flex;
-    list-style: none; /* Dari materi kuis: menghilangkan simbol bulat dari tag <ul> dan <li> */
+    list-style: none;
     gap: 30px;
 }
 
 .nav-links a {
     text-decoration: none;
     color: var(--dark);
-    font-weight: 500;
+    font-weight: 600;
     transition: color 0.3s;
 }
 
@@ -62,38 +68,45 @@ nav .container {
 
 /* Hero Section */
 .hero {
-    padding: 150px 0 100px;
-    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+    padding: 140px 0 100px;
+    background: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 100%);
     min-height: 100vh;
     display: flex;
     align-items: center;
 }
 
-/* Tambahan class baru menggunakan Flexbox agar seimbang */
-.hero-container {
+.hero-box {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 30px;
+    gap: 40px;
+    width: 100%;
 }
 
 .hero-content h1 {
     font-size: 48px;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 .hero-content span {
     color: var(--primary);
 }
 
-/* Menghias gambar menggunakan Box Model (Padding, Border, Background) */
-.hero-image {
-    width: 300px;
-    padding: 10px;
-    background: white;
-    border: 5px solid var(--primary);
+.hero-content p {
+    font-size: 18px;
+    color: var(--gray);
+    margin-bottom: 30px;
+}
+
+.profile-pic {
+    width: 280px;
+    height: 280px;
+    object-fit: cover;
     border-radius: 50%;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    padding: 8px;
+    background: white;
+    border: 4px solid var(--primary);
+    box-shadow: 0 10px 25px rgba(79, 70, 229, 0.2);
 }
 
 .btn {
@@ -102,59 +115,157 @@ nav .container {
     color: white;
     padding: 12px 30px;
     border-radius: 8px;
+    border: none;
     text-decoration: none;
+    font-size: 16px;
     font-weight: 600;
+    cursor: pointer;
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .btn:hover {
     transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3);
+    box-shadow: 0 10px 20px rgba(79, 70, 229, 0.3);
 }
 
-/* Projects */
+/* Projects & Page Sections */
 .projects {
     padding: 80px 0;
     background: white;
 }
 
-/* Penerapan text-align (kuis) agar teks judul berada di tengah */
-.projects h2 {
+.page-section {
+    padding: 130px 0 80px;
+    min-height: 90vh;
+}
+
+.projects h2,
+.page-section h2 {
     text-align: center;
+    font-size: 36px;
     margin-bottom: 40px;
-    color: var(--dark);
 }
 
 .project-grid {
-    display: flex;
-    gap: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
 }
 
-/* Menggunakan CSS Box model (margin, border, padding) untuk menghias kartu proyek */
 .project-card {
-    padding: 20px;
-    border: 1px solid var(--gray);
     background: var(--light);
-    border-radius: 8px;
-    transition: transform 0.3s;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 25px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
 }
 
 .project-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-10px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
 }
 
-/* Footer dipermak dengan text-align dan warna background */
-footer {
+.project-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.project-card h3 {
+    margin-bottom: 10px;
+    color: var(--primary);
+}
+
+.project-card p {
+    color: var(--gray);
+}
+
+/* About Page Box */
+.about-box {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    margin-bottom: 60px;
+}
+
+.about-text h3 {
+    font-size: 28px;
+    margin-bottom: 15px;
+    color: var(--primary);
+}
+
+.about-text p {
+    color: var(--gray);
+    margin-bottom: 25px;
+}
+
+/* Contact Form (Box Model: Padding, Border, Margin) */
+.form-wrapper {
+    max-width: 600px;
+    margin: 0 auto;
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.form-fieldset {
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 25px;
+}
+
+.form-legend {
+    font-weight: 700;
+    color: var(--primary);
+    padding: 0 10px;
+    font-size: 18px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--gray);
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 15px;
+}
+
+.btn-full {
+    width: 100%;
     text-align: center;
-    padding: 30px 20px;
+}
+
+/* Footer */
+footer {
     background: var(--dark);
     color: white;
+    text-align: center;
+    padding: 30px;
 }
 
 footer a {
-    color: var(--primary);
+    color: #818cf8;
     text-decoration: none;
-    transition: color 0.3s;
+    font-weight: 600;
 }
 
 footer a:hover {
