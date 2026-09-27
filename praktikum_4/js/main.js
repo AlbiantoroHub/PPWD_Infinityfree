@@ -19,17 +19,17 @@ if (typingText) {
 
         let delay = isDeleting ? 50 : 100;
         if (!isDeleting && charIndex === currentName.length) {
-            delay = 2000; // Jeda saat teks selesai diketik
+            delay = 2000; 
             isDeleting = true;
         } else if (isDeleting && charIndex === 0) {
             isDeleting = false;
             nameIndex = (nameIndex + 1) % names.length;
-            delay = 500; // Jeda sebelum mengetik kata baru
+            delay = 500; 
         }
         setTimeout(typeEffect, delay);
     }
 
-    typeEffect(); // Mulai efek
+    typeEffect(); 
 }
 
 
@@ -37,22 +37,24 @@ if (typingText) {
 const projectGrid = document.getElementById('project-grid');
 
 if (projectGrid) {
-    // Menggunakan layanan placeholder SVG yang selalu aktif agar gambar kartu dijamin tampil rapi
     const projects = [
         { 
-            title: 'Aplikasi Donasi', 
-            desc: 'Platform penyaluran donasi interaktif menggunakan HTML, CSS, JS, dan PHP.', 
-            image: 'https://placehold.co/600x400/4f46e5/ffffff?text=Aplikasi+Donasi' 
+            title: 'Website Profil', 
+            desc: 'Platform penyaluran donasi interaktif menggunakan HTML, CSS.', 
+            image: 'https://placehold.co/600x400/4f46e5/ffffff?text=Website+Profil' ,
+            link: 'project_card/website_profil/index.html'
         },
         { 
             title: 'Kalkulator JS', 
             desc: 'Program kalkulator interaktif dengan fungsi perhitungan parseFloat().', 
-            image: 'https://placehold.co/600x400/0f172a/ffffff?text=Kalkulator+JS' 
+            image: 'https://placehold.co/600x400/0f172a/ffffff?text=Kalkulator+JS' ,
+            link: 'project_card/kalkulator_js/index.html'
         },
         { 
             title: 'Form Interaktif', 
             desc: 'Formulir pendaftaran modern dengan fitur validasi input otomatis.', 
-            image: 'https://placehold.co/600x400/4f46e5/ffffff?text=Form+Interaktif' 
+            image: 'https://placehold.co/600x400/4f46e5/ffffff?text=Form+Interaktif' ,
+            link: 'project_card/formulir_interaktif/index.html'
         }
     ];
 
@@ -65,7 +67,7 @@ if (projectGrid) {
             <p>${project.desc}</p>
         `;
         card.addEventListener('click', () => {
-            alert(`Anda memilih proyek: ${project.title}`);
+            window.open(project.link, '_blank');
         });
         projectGrid.appendChild(card);
     });
