@@ -1,86 +1,98 @@
-// =========== 1. TYPING EFFECT ===========
+// =========== 1. TYPING EFFECT (Halaman Home) ===========
 const typingText = document.getElementById('typing-text');
 
-// MODIFIKASI: Menggunakan nama aslimu agar lebih mantap
-const names = ['Chattama Albiantoro', 'Web Developer', 'Mahasiswa Sistem Informasi'];
-let nameIndex = 0;
-let charIndex = 0;
-let isDeleting = false;
+if (typingText) {
+    const names = ['Chattama Albiantoro', 'Web Developer', 'Mahasiswa SI'];
+    let nameIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
 
-function typeEffect() {
-    const currentName = names[nameIndex];
-    
-    if (isDeleting) {
-        typingText.textContent = currentName.substring(0, charIndex - 1);
-        charIndex--;
-    } else {
-        typingText.textContent = currentName.substring(0, charIndex + 1);
-        charIndex++;
+    function typeEffect() {
+        const currentName = names[nameIndex];
+        if (isDeleting) {
+            typingText.textContent = currentName.substring(0, charIndex - 1);
+            charIndex--;
+        } else {
+            typingText.textContent = currentName.substring(0, charIndex + 1);
+            charIndex++;
+        }
+
+        let delay = isDeleting ? 50 : 100;
+        if (!isDeleting && charIndex === currentName.length) {
+            delay = 2000; // Jeda saat teks selesai diketik
+            isDeleting = true;
+        } else if (isDeleting && charIndex === 0) {
+            isDeleting = false;
+            nameIndex = (nameIndex + 1) % names.length;
+            delay = 500; // Jeda sebelum mengetik kata baru
+        }
+        setTimeout(typeEffect, delay);
     }
 
-    let delay = isDeleting ? 50 : 100;
-    
-    if (!isDeleting && charIndex === currentName.length) {
-        delay = 2000; // Jeda saat teks selesai diketik
-        isDeleting = true;
-    } else if (isDeleting && charIndex === 0) {
-        isDeleting = false;
-        nameIndex = (nameIndex + 1) % names.length;
-        delay = 500; // Jeda sebelum mengetik kata baru
-    }
-    
-    setTimeout(typeEffect, delay);
+    typeEffect(); // Mulai efek
 }
 
-typeEffect(); // Mulai efek
 
-
-// =========== 2. GENERATE PROJECT CARDS ===========
-// MODIFIKASI: Memasukkan proyek Aplikasi Donasi-mu
-const projects = [
-    { 
-        title: 'Aplikasi Donasi', 
-        desc: 'Web donasi menggunakan PHP, HTML, CSS, dan JS.', 
-        image: 'https://via.placeholder.com/300x200/2563eb/fff?text=Donasi' 
-    },
-    { 
-        title: 'Kalkulator JS', 
-        desc: 'Kalkulator interaktif', 
-        image: 'https://via.placeholder.com/300x200/2563eb/fff?text=Kalkulator' 
-    },
-    { 
-        title: 'Form Interaktif', 
-        desc: 'Form pendaftaran dengan validasi', 
-        image: 'https://via.placeholder.com/300x200/2563eb/fff?text=Form' 
-    }
-];
-
-// Mengambil elemen (Sesuai konsep pemilih elemen di Kuis No. 16)
+// =========== 2. GENERATE PROJECT CARDS (Halaman Home) ===========
 const projectGrid = document.getElementById('project-grid');
 
-// Kosongkan isi HTML statis sebelumnya agar tidak menumpuk dengan data JS
-projectGrid.innerHTML = ''; 
+if (projectGrid) {
+    // Menggunakan layanan placeholder SVG yang selalu aktif agar gambar kartu dijamin tampil rapi
+    const projects = [
+        { 
+            title: 'Aplikasi Donasi', 
+            desc: 'Platform penyaluran donasi interaktif menggunakan HTML, CSS, JS, dan PHP.', 
+            image: 'https://placehold.co/600x400/4f46e5/ffffff?text=Aplikasi+Donasi' 
+        },
+        { 
+            title: 'Kalkulator JS', 
+            desc: 'Program kalkulator interaktif dengan fungsi perhitungan parseFloat().', 
+            image: 'https://placehold.co/600x400/0f172a/ffffff?text=Kalkulator+JS' 
+        },
+        { 
+            title: 'Form Interaktif', 
+            desc: 'Formulir pendaftaran modern dengan fitur validasi input otomatis.', 
+            image: 'https://placehold.co/600x400/4f46e5/ffffff?text=Form+Interaktif' 
+        }
+    ];
 
-projects.forEach(project => {
-    const card = document.createElement('div');
-    card.className = 'project-card';
-    
-    // MODIFIKASI: Menerapkan alt (Kuis 18), text-align (Kuis 8), dan target="_blank" (Kuis 12)
-    card.innerHTML = `
-        <img src="${project.image}" alt="Tangkapan layar ${project.title}" style="width: 100%; border-radius: 8px;">
-        <h3 style="text-align: center; margin: 15px 0;">${project.title}</h3>
-        <p style="text-align: center; margin-bottom: 20px;">${project.desc}</p>
-        <div style="text-align: center;">
-            <a href="https://github.com/AlbiantoroHub" class="btn" target="_blank">Lihat Detail</a>
-        </div>
-    `;
-    
-    card.addEventListener('click', (e) => {
-        // Mencegah alert muncul jika yang diklik adalah tombol link "Lihat Detail"
-        if(e.target.tagName !== 'A') {
+    projects.forEach(project => {
+        const card = document.createElement('div');
+        card.className = 'project-card';
+        card.innerHTML = `
+            <img src="${project.image}" alt="${project.title}">
+            <h3>${project.title}</h3>
+            <p>${project.desc}</p>
+        `;
+        card.addEventListener('click', () => {
             alert(`Anda memilih proyek: ${project.title}`);
+        });
+        projectGrid.appendChild(card);
+    });
+}
+
+
+// =========== 3. FITUR TAMBAHAN: VALIDASI FORM (Halaman Contact) ===========
+const contactForm = document.getElementById('contact-form');
+
+if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
+        // Mencegah halaman melakukan reload saat form dikirim (Materi Kuis Soal 15)
+        e.preventDefault();
+
+        const nama = document.getElementById('nama').value;
+        const email = document.getElementById('email').value;
+        const pesan = document.getElementById('pesan').value;
+
+        // Validasi apakah ada kolom yang masih kosong
+        if (nama === '' || email === '' || pesan === '') {
+            alert('Mohon lengkapi seluruh kolom (Nama, Email, dan Pesan) sebelum mengirim!');
+        } else {
+            alert(`Terima kasih ${nama}! Pesan Anda telah berhasil dikirim.`);
+            // Mengosongkan kembali isi input setelah berhasil
+            document.getElementById('nama').value = '';
+            document.getElementById('email').value = '';
+            document.getElementById('pesan').value = '';
         }
     });
-    
-    projectGrid.appendChild(card);
-});
+}
