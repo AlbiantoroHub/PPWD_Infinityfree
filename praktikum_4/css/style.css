@@ -6,8 +6,8 @@
 }
 
 :root {
-    --primary: #4f46e5; /* Warna kustom Indigo Modern */
-    --dark: #0f172a;    /* Warna kustom Slate Gelap */
+    --primary: #4f46e5; 
+    --dark: #0f172a;    
     --light: #f8fafc;
     --gray: #64748b;
 }
